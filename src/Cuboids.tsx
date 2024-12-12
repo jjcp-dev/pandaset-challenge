@@ -11,6 +11,7 @@ export type CuboidsProps = {
   onHover: (cuboids: Cuboid[]) => void;
 };
 
+/// Render a list of cuboids with support for mouse based selection
 export function Cuboids({ cuboids, onHover }: CuboidsProps) {
   const [hovered, setHovered] = useState({});
 

@@ -5,7 +5,7 @@ import { CameraControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
 import { Cuboids } from "./Cuboids";
 import { PointsCloud } from "./PointsCloud";
 import { InfoPanel } from "./InfoPanel";
-import * as THREE from "three";
+import { Color } from "three";
 import { Cuboid } from "./types/Cuboid";
 import { useControls } from "leva";
 
@@ -13,6 +13,7 @@ export type ToolProps = {
   clip: Clip;
 };
 
+// Tool that interactively presents a Clip to the user.
 export function Tool({ clip }: ToolProps) {
   const { pointSize, frameNumber } = useControls("Point Cloud", {
     pointSize: {
@@ -38,9 +39,10 @@ export function Tool({ clip }: ToolProps) {
         <Canvas>
           <color attach="background" args={[0xfff0ea]} />
           <ambientLight intensity={4} />
-
           <CameraControls makeDefault />
 
+          {/* Adjust the orientation here so that we don't have to
+              mess with adjusting the coordinate system */}
           <group rotation={[-Math.PI / 2, 0, 0]}>
             <Cuboids
               cuboids={clip.frames[frameNumber].cuboids}
@@ -51,8 +53,8 @@ export function Tool({ clip }: ToolProps) {
               minZ={clip.minZ}
               maxZ={clip.maxZ}
               pointSize={pointSize}
-              gradientFrom={new THREE.Color("#00FF00")}
-              gradientTo={new THREE.Color("#FF0000")}
+              gradientFrom={new Color("#00FF00")}
+              gradientTo={new Color("#FF0000")}
               points={clip.frames[frameNumber].points}
             />
           </group>
