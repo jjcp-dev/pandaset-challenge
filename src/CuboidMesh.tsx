@@ -1,26 +1,32 @@
 import React from "react";
-import { Cuboid } from "./Cuboid";
+import { Cuboid } from "./types/Cuboid";
 import { Edges } from "@react-three/drei";
+import { MeshProps } from "@react-three/fiber";
 
-type CuboidMeshProps = {
+export type CuboidMeshProps = {
   cuboid: Cuboid;
   hovered: boolean;
-};
+} & MeshProps;
 
-export function CuboidMesh({ cuboid, hovered, ...rest }: CuboidMeshProps) {
+// Renders a translucent cuboid with visible edges
+export function CuboidMesh({
+  cuboid,
+  hovered = false,
+  ...rest
+}: CuboidMeshProps) {
   const position = [
     cuboid["position.x"],
     cuboid["position.y"],
     cuboid["position.z"],
   ];
 
-  const rotation = [0, 0, cuboid.yaw];
-
   const scale = [
     cuboid["dimensions.x"],
     cuboid["dimensions.y"],
     cuboid["dimensions.z"],
   ];
+
+  const rotation = [0, 0, cuboid.yaw];
 
   return (
     <mesh
