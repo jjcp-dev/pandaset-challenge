@@ -22,10 +22,10 @@ export function CuboidMesh({ cuboid, ...rest }: CuboidMeshProps) {
   ];
 
   return (
-    <mesh {...rest} position={position} rotation={rotation}>
+    <mesh position={position} rotation={rotation} {...rest}>
       <boxGeometry args={scale} />
       <meshPhongMaterial color="#ff0000" opacity={0.2} transparent />
-      <Edges linewidth={2} scale={1.0} threshold={15} color="black" />
+      <Edges linewidth={2} color="black" />
     </mesh>
   );
 }
