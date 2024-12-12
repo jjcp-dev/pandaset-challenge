@@ -1,7 +1,8 @@
+import { MeshProps } from "@react-three/fiber";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Color, Points, DynamicDrawUsage } from "three";
 
-type PointsCloudProps = {
+export type PointsCloudProps = {
   maxPoints: number;
   minZ: number;
   maxZ: number;
@@ -9,8 +10,9 @@ type PointsCloudProps = {
   points: number[][];
   gradientFrom: Color;
   gradientTo: Color;
-};
+} & MeshProps;
 
+// Renders a point cloud from a single frame of a Clip
 export function PointsCloud({
   maxPoints,
   minZ,
@@ -19,6 +21,7 @@ export function PointsCloud({
   pointSize,
   gradientFrom,
   gradientTo,
+  ...rest
 }: PointsCloudProps) {
   const pointsRef = useRef<Points>(null!);
 
@@ -55,7 +58,7 @@ export function PointsCloud({
   }, [pointsRef, points, positions, colors]);
 
   return (
-    <points ref={pointsRef}>
+    <points ref={pointsRef} {...rest}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
