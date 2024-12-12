@@ -4,9 +4,10 @@ import { Edges } from "@react-three/drei";
 
 type CuboidMeshProps = {
   cuboid: Cuboid;
+  hovered: boolean;
 };
 
-export function CuboidMesh({ cuboid, ...rest }: CuboidMeshProps) {
+export function CuboidMesh({ cuboid, hovered, ...rest }: CuboidMeshProps) {
   const position = [
     cuboid["position.x"],
     cuboid["position.y"],
@@ -22,9 +23,18 @@ export function CuboidMesh({ cuboid, ...rest }: CuboidMeshProps) {
   ];
 
   return (
-    <mesh position={position} rotation={rotation} {...rest}>
+    <mesh
+      position={position}
+      rotation={rotation}
+      userData={{ cuboid }}
+      {...rest}
+    >
       <boxGeometry args={scale} />
-      <meshPhongMaterial color="#ff0000" opacity={0.2} transparent />
+      <meshPhongMaterial
+        color="#ff0000"
+        opacity={hovered ? 0.7 : 0.2}
+        transparent
+      />
       <Edges linewidth={2} color="black" />
     </mesh>
   );
