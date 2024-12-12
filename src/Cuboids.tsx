@@ -27,14 +27,14 @@ export function Cuboids({ cuboids, onHover }: CuboidsProps) {
         />
       ))}
       <CycleRaycast
-        onChanged={(objects, cycle) => {
+        onChanged={(objects, _cycle) => {
           const cuboids = objects.map((x) => x.object.userData.cuboid);
 
           setHovered(
-            cuboids.reduce((acc, x) => {
-              acc[x.uuid] = x;
-              return acc;
-            }, {})
+            cuboids.reduce(
+              (acc, cuboid) => ({ ...acc, [cuboid.uuid]: cuboid }),
+              {}
+            )
           );
 
           onHover(objects.map((x) => x.object.userData.cuboid));
