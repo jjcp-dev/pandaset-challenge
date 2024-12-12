@@ -5,6 +5,7 @@ export type InfoPanelProps = {
   hoveredCuboids: Cuboid[];
 };
 
+/// Very basic information panel, displays some info on hovered cuboids
 export function InfoPanel({ hoveredCuboids }: InfoPanelProps) {
   return (
     <div className="panel">

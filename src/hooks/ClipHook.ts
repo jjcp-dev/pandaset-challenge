@@ -40,6 +40,7 @@ function computeClipFromFrames(frames: Frame[]): Clip {
   return { frames, maxPoints, minZ, maxZ };
 }
 
+// Fetch the full clip of frames from scale.com
 export function useClip(): [Clip, boolean] {
   const [clip, setClip] = useState<Clip>({
     frames: [],
